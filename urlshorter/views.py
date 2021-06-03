@@ -31,5 +31,6 @@ def redirect_view(request, short_part):
     except:
         template = 'home.html'
         context = dict()
+        context['form'] = UrlShortenerForm()
         context['errors'] = "Provided link is broken"
         return render(request, template, context)
