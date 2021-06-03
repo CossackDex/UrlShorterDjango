@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from .utils import create_random_url
 
 
-# Create your models here.
 class UrlShortener(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
     click_counter = models.PositiveIntegerField(default=0)
