@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect, Http404
 
 from .models import UrlShortener
@@ -6,9 +6,10 @@ from .models import UrlShortener
 from .forms import UrlShortenerForm
 
 
-def home_view(request):
+def home_view(request, context=None):
     template = 'home.html'
-    context = dict()
+    if context is None:
+        context = dict()
     context['form'] = UrlShortenerForm()
     if request.method == "GET":
         return render(request, template, context)
@@ -29,8 +30,6 @@ def redirect_view(request, short_part):
         shortener.click()
         return HttpResponseRedirect(shortener.long_url)
     except:
-        template = 'home.html'
         context = dict()
-        context['form'] = UrlShortenerForm()
         context['errors'] = "Provided link is broken"
-        return render(request, template, context)
+        return redirect('/', context)
