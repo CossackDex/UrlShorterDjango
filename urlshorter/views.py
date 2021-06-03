@@ -29,4 +29,7 @@ def redirect_view(request, short_part):
         shortener.click()
         return HttpResponseRedirect(shortener.long_url)
     except:
-        raise Http404("Provided link is broken")
+        template = 'home.html'
+        context = dict()
+        context['errors'] = "Provided link is broken"
+        return render(request, template, context)

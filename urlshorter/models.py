@@ -25,5 +25,3 @@ class UrlShortener(models.Model):
         if not self.short_url:
             self.short_url = create_random_url(self)
         super().save(*args, **kwargs)
-    def get_abs_url(self):
-        return reverse_lazy()
